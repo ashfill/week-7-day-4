@@ -10,109 +10,116 @@ using School;
 
 namespace School.Controllers
 {
-    public class StudentsController : Controller
+    public class StudentsCoursController : Controller
     {
         private SchoolEntities db = new SchoolEntities();
 
-        // GET: Students
+        // GET: StudentsCours
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            var studentsCourses = db.StudentsCourses.Include(s => s.Cours).Include(s => s.Student);
+            return View(studentsCourses.ToList());
         }
 
-        // GET: Students/Details/5
+        // GET: StudentsCours/Details/5
         public ActionResult Details(int? id)
         {
-
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            StudentsCours studentsCours = db.StudentsCourses.Find(id);
+            if (studentsCours == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(studentsCours);
         }
 
-        // GET: Students/Create
+        // GET: StudentsCours/Create
         public ActionResult Create()
         {
+            ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "CourseName");
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName");
             return View();
         }
 
-        // POST: Students/Create
+        // POST: StudentsCours/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentID,StudentName")] Student student)
+        public ActionResult Create([Bind(Include = "StudentID,CourseID,Geez")] StudentsCours studentsCours)
         {
             if (ModelState.IsValid)
             {
-                db.Students.Add(student);
+                db.StudentsCourses.Add(studentsCours);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(student);
+            ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "CourseName", studentsCours.CourseID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName", studentsCours.StudentID);
+            return View(studentsCours);
         }
 
-        // GET: Students/Edit/5
+        // GET: StudentsCours/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            StudentsCours studentsCours = db.StudentsCourses.Find(id);
+            if (studentsCours == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "CourseName", studentsCours.CourseID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName", studentsCours.StudentID);
+            return View(studentsCours);
         }
 
-        // POST: Students/Edit/5
+        // POST: StudentsCours/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentID,StudentName")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentID,CourseID,Geez")] StudentsCours studentsCours)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(studentsCours).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(student);
+            ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "CourseName", studentsCours.CourseID);
+            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName", studentsCours.StudentID);
+            return View(studentsCours);
         }
 
-        // GET: Students/Delete/5
+        // GET: StudentsCours/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            StudentsCours studentsCours = db.StudentsCourses.Find(id);
+            if (studentsCours == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(studentsCours);
         }
 
-        // POST: Students/Delete/5
+        // POST: StudentsCours/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
+            StudentsCours studentsCours = db.StudentsCourses.Find(id);
+            db.StudentsCourses.Remove(studentsCours);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

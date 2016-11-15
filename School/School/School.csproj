@@ -174,10 +174,6 @@
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Courses\Details.cshtml" />
     <Content Include="Views\Courses\Delete.cshtml" />
-    <Content Include="Views\Students\Create.cshtml" />
-    <Content Include="Views\Students\Edit.cshtml" />
-    <Content Include="Views\Students\Details.cshtml" />
-    <Content Include="Views\Students\Delete.cshtml" />
     <EntityDeploy Include="SchoolApp.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SchoolApp.Designer.cs</LastGenOutput>
@@ -185,6 +181,16 @@
     <Content Include="SchoolApp.edmx.diagram">
       <DependentUpon>SchoolApp.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\StudentsCours\Create.cshtml" />
+    <Content Include="Views\StudentsCours\Delete.cshtml" />
+    <Content Include="Views\StudentsCours\Details.cshtml" />
+    <Content Include="Views\StudentsCours\Edit.cshtml" />
+    <Content Include="Views\StudentsCours\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -211,9 +217,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
-    <Content Include="Views\StudentsCourses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -222,7 +226,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
-    <Compile Include="Controllers\StudentsCoursesController.cs" />
+    <Compile Include="Controllers\StudentsCoursController.cs" />
     <Compile Include="Cours.cs">
       <DependentUpon>SchoolApp.tt</DependentUpon>
     </Compile>
